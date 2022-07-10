@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "14a5727d-ba12-4a49-8d55-074777a29b09",
+		"name": "Bagian HRD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16343673"
+	},
+	"item": [
+		{
+			"name": "Cek Pendaftaran",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pendaftaran",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pendaftaran"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cek Data Admin",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hrd/cek_admin",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hrd",
+						"cek_admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Data Admin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hrd/delete_admin/6",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hrd",
+						"delete_admin",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verifikasi Relawan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hrd/verify_relawan/13/37|PlmsthucY7Uzwv8DUayxdtV6gzRRBrplFuqSPmXC",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hrd",
+						"verify_relawan",
+						"13",
+						"37|PlmsthucY7Uzwv8DUayxdtV6gzRRBrplFuqSPmXC"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buat Link Akses Admin Untuk Bisa Register",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/admin_akses_register/45|hS7Or2hUexJ4v47orXrmbsSjKtu7ofF7wgluckHF",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"admin_akses_register",
+						"45|hS7Or2hUexJ4v47orXrmbsSjKtu7ofF7wgluckHF"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Token Akses Registrasi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hrd/delete_akses_registrasi/akses50|1N0PgAcefMzXhc1buIkNvY3lIy2JHj7pNkLMgPuM",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hrd",
+						"delete_akses_registrasi",
+						"akses50|1N0PgAcefMzXhc1buIkNvY3lIy2JHj7pNkLMgPuM"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hrd Add Admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Kurniawan",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "Kurniawan@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "anonim123",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "anonim123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hrd/add_admin",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hrd",
+						"add_admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Hrd Edit Data Admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Dito",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "Dito@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "anonim12345",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "anonim12345",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/hrd/edit_admin/5",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"hrd",
+						"edit_admin",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

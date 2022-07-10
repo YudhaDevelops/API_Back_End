@@ -1,0 +1,369 @@
+{
+	"info": {
+		"_postman_id": "e26377e7-2e19-49bb-922e-9ef8b651ac12",
+		"name": "Authentication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16343673"
+	},
+	"item": [
+		{
+			"name": "Get Semua Data User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Rico",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "bimaboim11@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "anonim123",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "anonim123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/acount_user_data_application",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"acount_user_data_application"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cek Identitas User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Rico",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "bimaboim11@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "anonim123",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "anonim123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/cekUser/12",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"cekUser",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Relawan Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Adit",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "Adit@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "anonim123",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "anonim123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HRD Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Danang",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "bimaboim15@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "anonim123",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "anonim123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/register/hrd",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"register",
+						"hrd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Nanda",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "nanda@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "anonim123",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "anonim123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/register/admin/akses50|1N0PgAcefMzXhc1buIkNvY3lIy2JHj7pNkLMgPuM",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"register",
+						"admin",
+						"akses50|1N0PgAcefMzXhc1buIkNvY3lIy2JHj7pNkLMgPuM"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "bimaboim10@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "anonim12345",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Hrd",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "verol@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "anonim123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:8000/api/logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "52|rnNwNFprHlKqinMwhbBfdjmQcYDHLjXyGSnW3Xgs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/logout",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
