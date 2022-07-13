@@ -83,13 +83,18 @@ class AdminController extends Controller
     }
 
     public function cek_admin(){
-        $data = User::where('role',1)->get();
-        // dd($data);
-        if(empty($data)){
-            return ApiFormat::responseError(400,'Tidak Ada Data');
-        }else{
-            return ApiFormat::kirimResponse(200,'Data Ditemukan',$data);
-        }
+        // dd(Auth::check());
+        dd(auth()->user());
+        // if(auth()->user()->role == 2 && auth()->user()->tokens != null){
+        //     $data = User::where('role',1)->get();
+        //     // dd($data);
+        //     if(empty($data)){
+        //         return ApiFormat::responseError(400,'Tidak Ada Data');
+        //     }else{
+        //         return ApiFormat::kirimResponse(200,'Data Ditemukan',$data);
+        //     }
+        // }
+        // return ApiFormat::responseError(404,'Anda Harus Login');
     }
 
     public function edit_admin(Request $request, $id){
@@ -166,8 +171,9 @@ class AdminController extends Controller
 
     // pertanyaan cek token untuk setiap mao login nya gimana?
     public function verify_relawan($id,$tokens){ //id ==> id relawan / user role relawan
+        // dd(auth()->user()->tokens);
         // cek hak akses
-        $hrd = User::where('tokens',$tokens)->first(); 
+        $hrd = auth()->user()->tokens; 
         // dd($hrd);
         if($hrd == null){
             return ApiFormat::responseError(404,'Anda Tidak Memiliki Hak');

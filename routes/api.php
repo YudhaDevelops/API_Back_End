@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MahasiswaController;
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\ResetPassController;
+use App\Http\Controllers\Api\DataDiriController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -64,6 +65,29 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/hrd/verify_relawan/{id}/{tokens}','verify_relawan');
     Route::get('/admin_akses_register/{tokens}','create_register_admin');
     Route::get('/hrd/delete_akses_registrasi/{token}','delete_akses_registrasi');
+});
+
+// route data diri
+Route::controller(DataDiriController::class)->group(function(){
+    Route::get('/getProvinsi','getProvinsi');
+    Route::get('/getKabupaten','getKabupaten');
+    Route::get('/getKecamatan','getKecamatan');
+    Route::get('/getKelurahan','getKelurahan');
+
+    // get berdasarkan id
+    Route::get('/provinsi/{id}','provinsi');
+    Route::get('/kabupaten/{id}','kabupaten');
+    Route::get('/kecamatan/{id}','kecamatan');
+    Route::get('/kelurahan/{id}','kelurahan');
+
+    Route::get('/coba/{id}','coba');
+
+    Route::get('/getAlamat','getAlamat');
+
+
+    // soal data keahlian
+    Route::post('/tambah_keahlian/{id}','tambah_keahlian');
+    Route::get('/cekKeahlian','cekKeahlian');
 });
 
 Route::middleware('auth:sanctum')->group(function () {

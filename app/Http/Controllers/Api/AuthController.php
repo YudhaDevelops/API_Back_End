@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Helpers\ApiFormat;
+use Session;
+use AuthenticatesUsers;
+// use Illuminate\Auth\RequestGuard;
 
 class AuthController extends Controller
 {
@@ -254,22 +257,22 @@ class AuthController extends Controller
             }
 
             //jika berhasil maka login
-            $tokenResult = $user->createToken('authToken')->plainTextToken;
+            $tokenResult = $user->createToken( str()->random(40) )->plainTextToken;
 
             //input token table user
-            $user->update([
-                'tokens' => $tokenResult,
-            ]);
+            // $user->update([
+            //     'tokens' => $tokenResult,
+            // ]);
 
             // input token table sesion user
-            Sesi_User::create([
-                'tokens' => $tokenResult,
-            ]);
-
+            // Sesi_User::create([
+            //     'tokens' => $tokenResult,
+            // ]);
+           
             return $this->sendResponse([
-                'access_token' => $tokenResult,
-                'token_type' => 'Bearer',
-                'user' => $user
+                'access_token'  => $tokenResult,
+                'token_type'    => 'Bearer',
+                'user'          => $user
             ], 'Authenticated');
 
         } catch (Exception $error) {
@@ -317,31 +320,47 @@ class AuthController extends Controller
 
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        $user = Auth::user();
-        $sesion = Sesi_User::where('tokens',$user->tokens)->firstOrFail();
-        // return response()->json([
-        //     'data di session'   => $sesion->tokens,
-        // ]);
+        // dd($request);
+        // $request->logout();
+        // Auth::logout();
+        // $this->guard()->logout();
+        
+        // dd(auth()->user());
+        // dd(Auth::logout());
+        // dd(Session::flush());
+        // dd(Auth::guard($guard)->logout());
+        Auth::user()->tokens()->delete();
+        // $request->user()->currentAccessToken()->delete();
 
-        if($user->tokens == $sesion->tokens){
-            Auth::user()->update([
-                'tokens'          => null,
-            ]);
-            Auth::user()->tokens()->delete();
-            $sesion->delete();
-
-            return ApiFormat::kirimResponse(200,"Berhasil Logout");
-        }else{
-            return $this->sendError(
-                [
-                    'message' => 'Something went wrong',
-                    'error' => $error
-                ],
-                'Logout Failed',
-            );
-        }
+        // Auth::user()->logout();
+        $request->session()->invalidate();
+        // $request->session()->regeneratedToken();
+        // dd(Auth::user());
+        // $sesion = Sesi_User::where('tokens',$user->tokens)->firstOrFail();
+        // // return response()->json([
+        //     //     'data di session'   => $sesion->tokens,
+        //     // ]);
+        
+            
+        // if($user->tokens == $sesion->tokens){
+        //     Auth::user()->update([
+        //         'tokens'          => null,
+        //     ]);
+            
+        //     Auth::user()->tokens()->delete();
+            // $sesion->delete();
+        return ApiFormat::kirimResponse(200,"Berhasil Logout");
+        // }else{
+        //     return $this->sendError(
+        //         [
+        //             'message' => 'Something went wrong',
+        //             'error' => $error
+        //         ],
+        //         'Logout Failed',
+        //     );
+        // }
     }
 
     public function cekUser($id){

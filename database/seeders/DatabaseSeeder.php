@@ -20,5 +20,11 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        // $this->call(ProvinsiSeeder::class);
+        // $this->call(KabupatenSeeder::class);
+        // $this->call(KecamatanSeeder::class);
+        // $this->call(KelurahanSeeder::class);
+
+        $this->call(KeahlianSeeder::class);
     }
 }

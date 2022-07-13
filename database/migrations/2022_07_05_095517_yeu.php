@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id('id');
-            $table->string('nama_lengkap', 100);
-            $table->string('email', 255);
-            $table->string('password', 255);
-            $table->integer('role');
-        });
+        // Schema::create('users', function (Blueprint $table) {
+        //     $table->id('id');
+        //     $table->string('nama_lengkap', 100);
+        //     $table->string('email', 255);
+        //     $table->string('password', 255);
+        //     $table->integer('role');
+        // });
 
         Schema::create('verifikasi', function (Blueprint $table) {
             $table->unsignedBigInteger('id_admin');
@@ -28,14 +28,14 @@ return new class extends Migration
 
             $table->foreign('id_admin') -> references('id') -> on('users');
             $table->foreign('id_relawan')-> references('id') -> on('users');
-
+            $table->timestamps();
             $table->primary(['id_admin', 'id_relawan']);
         });
 
         Schema::create('provinsi', function (Blueprint $table) {
             $table->char('id',2);
             $table->string('nama',255);
-
+            $table->timestamps();
             $table->primary('id');
         });
 
@@ -43,7 +43,7 @@ return new class extends Migration
             $table->char('id',4);
             $table->char('id_provinsi',2);
             $table->string('nama',255);
-
+            $table->timestamps();
             $table->primary('id');
             $table->foreign('id_provinsi')->references('id')->on('provinsi');
         });
@@ -52,7 +52,7 @@ return new class extends Migration
             $table->char('id',7);
             $table->char('id_kabupaten',4);
             $table->string('nama',255);
-
+            $table->timestamps();
             $table->primary('id');
             $table->foreign('id_kabupaten')->references('id')->on('kabupaten');
         });
@@ -61,7 +61,7 @@ return new class extends Migration
             $table->char('id',10);
             $table->char('id_kecamatan',7);
             $table->string('nama',255);
-
+            $table->timestamps();
             $table->primary('id');
             $table->foreign('id_kecamatan')->references('id')->on('kecamatan');
         });
@@ -86,7 +86,7 @@ return new class extends Migration
             $table->string('instansi', 255);
             $table->string('file_pelatihan', 255);
             $table->boolean('ready')->default('0');
-
+            $table->timestamps();
             $table->foreign('id_user') -> references('id') -> on('users');
             $table->foreign('alamat_ktp') -> references('id') -> on('kelurahan');
             $table->foreign('alamat_domisili') -> references('id') -> on('kelurahan');
@@ -97,26 +97,29 @@ return new class extends Migration
         Schema::create('keahlian', function (Blueprint $table) {
             $table->id('id_keahlian');
             $table->string('jenis_keahlian',25);
+            $table->timestamps();
         });
 
         Schema::create('relawan_keahlian', function (Blueprint $table) {
             $table->unsignedBigInteger('id_relawan');
             $table->unsignedBigInteger('id_keahlian');
-
+            $table->timestamps();
             $table->foreign('id_relawan')->references('id')->on('users');
             $table->foreign('id_keahlian')->references('id_keahlian')->on('keahlian');
+            
         });
 
         Schema::create('pengalaman', function (Blueprint $table) {
             $table->id('id_pengalaman');
             $table->string('nama_instansi',50);
             $table->string('durasi_waktu',20);
+            $table->timestamps();
         });
 
         Schema::create('relawan_pengalaman', function (Blueprint $table) {
             $table->unsignedBigInteger('id_relawan');
             $table->unsignedBigInteger('id_pengalaman');
-
+            $table->timestamps();
             $table->foreign('id_relawan')->references('id')->on('users');
             $table->foreign('id_pengalaman')->references('id_pengalaman')->on('pengalaman');
         });
@@ -125,12 +128,13 @@ return new class extends Migration
             $table->id('id_project');
             $table->string('nama_project',50);
             $table->string('foto',255);
+            $table->timestamps();
         });
 
         Schema::create('relawan_project', function (Blueprint $table) {
             $table->unsignedBigInteger('id_relawan');
             $table->unsignedBigInteger('id_project');
-
+            $table->timestamps();
             $table->foreign('id_relawan')->references('id')->on('users');
             $table->foreign('id_project')->references('id_project')->on('project');
         });
