@@ -170,7 +170,7 @@ class AdminController extends Controller
     }
 
     // pertanyaan cek token untuk setiap mao login nya gimana?
-    public function verify_relawan($id,$tokens){ //id ==> id relawan / user role relawan
+    public function verify_relawan($id){ //id ==> id relawan / user role relawan
         // dd(auth()->user()->tokens);
         // cek hak akses
         $hrd = auth()->user()->tokens; 

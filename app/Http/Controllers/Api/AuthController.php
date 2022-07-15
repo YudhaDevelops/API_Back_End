@@ -21,15 +21,15 @@ class AuthController extends Controller
     public function register_relawan(Request $request){
         try {
             $rules = [
-                'name'                  => 'required|string|min:3|max:64',
+                'nama_lengkap'          => 'required|string|min:3|max:64',
                 'email'                 => 'required|email|unique:users',
                 'password'              => 'required|min:6|confirmed'
             ];
     
             $messages = [
-                'name.required'         => 'Nama Lengkap wajib diisi',
-                'name.min'              => 'Nama lengkap minimal 3 karakter',
-                'name.max'              => 'Nama lengkap maksimal 64 karakter',
+                'nama_lengkap.required'         => 'Nama Lengkap wajib diisi',
+                'nama_lengkap.min'              => 'Nama lengkap minimal 3 karakter',
+                'nama_lengkap.max'              => 'Nama lengkap maksimal 64 karakter',
                 'email.required'        => 'Email wajib diisi',
                 'email.email'           => 'Email tidak valid',
                 'email.unique'          => 'Email sudah terdaftar',
@@ -52,7 +52,7 @@ class AuthController extends Controller
             }
             
             User::create([
-                'name' => $request->name,
+                'nama_lengkap' => $request->nama_lengkap,
                 'email' => strtolower($request->email),
                 'password' => Hash::make($request->password),
                 'role'  => 0,
@@ -122,15 +122,15 @@ class AuthController extends Controller
         if($cekToken != null){
             try {
                 $rules = [
-                    'name'                  => 'required|string|min:3|max:64',
+                    'nama_lengkap'                  => 'required|string|min:3|max:64',
                     'email'                 => 'required|email|unique:users',
                     'password'              => 'required|min:6|confirmed'
                 ];
         
                 $messages = [
-                    'name.required'         => 'Nama Lengkap wajib diisi',
-                    'name.min'              => 'Nama lengkap minimal 3 karakter',
-                    'name.max'              => 'Nama lengkap maksimal 64 karakter',
+                    'nama_lengkap.required'         => 'Nama Lengkap wajib diisi',
+                    'nama_lengkap.min'              => 'Nama lengkap minimal 3 karakter',
+                    'nama_lengkap.max'              => 'Nama lengkap maksimal 64 karakter',
                     'email.required'        => 'Email wajib diisi',
                     'email.email'           => 'Email tidak valid',
                     'email.unique'          => 'Email sudah terdaftar',
@@ -148,7 +148,7 @@ class AuthController extends Controller
                 }
                 
                 User::create([
-                    'name' => $request->name,
+                    'nama_lengkap' => $request->nama_lengkap,
                     'email' => strtolower($request->email),
                     'password' => Hash::make($request->password),
                     'role'  => 1,
@@ -182,15 +182,15 @@ class AuthController extends Controller
         if($hrd == null){
             try {
                 $rules = [
-                    'name'                  => 'required|string|min:3|max:64',
+                    'nama_lengkap'                  => 'required|string|min:3|max:64',
                     'email'                 => 'required|email|unique:users',
                     'password'              => 'required|min:6|confirmed'
                 ];
         
                 $messages = [
-                    'name.required'         => 'Nama Lengkap wajib diisi',
-                    'name.min'              => 'Nama lengkap minimal 3 karakter',
-                    'name.max'              => 'Nama lengkap maksimal 64 karakter',
+                    'nama_lengkap.required'         => 'Nama Lengkap wajib diisi',
+                    'nama_lengkap.min'              => 'Nama lengkap minimal 3 karakter',
+                    'nama_lengkap.max'              => 'Nama lengkap maksimal 64 karakter',
                     'email.required'        => 'Email wajib diisi',
                     'email.email'           => 'Email tidak valid',
                     'email.unique'          => 'Email sudah terdaftar',
@@ -208,7 +208,7 @@ class AuthController extends Controller
                 }
                 
                 User::create([
-                    'name' => $request->name,
+                    'nama_lengkap' => $request->nama_lengkap,
                     'email' => strtolower($request->email),
                     'password' => Hash::make($request->password),
                     'role'  => 2,

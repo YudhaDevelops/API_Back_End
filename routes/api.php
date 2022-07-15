@@ -80,6 +80,9 @@ Route::controller(DataDiriController::class)->group(function(){
     Route::get('/kecamatan/{id}','kecamatan');
     Route::get('/kelurahan/{id}','kelurahan');
 
+    // isi data tabel alamat
+    Route::post('/addAlamat','addAlamat');
+
     Route::get('/coba/{id}','coba');
 
     Route::get('/getAlamat','getAlamat');
@@ -87,7 +90,13 @@ Route::controller(DataDiriController::class)->group(function(){
 
     // soal data keahlian
     Route::post('/tambah_keahlian/{id}','tambah_keahlian');
+    Route::post('/delete_keahlian/{id}','delete_keahlian');
+    Route::post('/tambah_item_keahlian','tambah_item_keahlian');
     Route::get('/cekKeahlian','cekKeahlian');
+
+    // soal data Pengalaman
+    Route::post('/tambahPengalaman','tambahPengalaman');
+    Route::get('/deletePengalaman/{idUser}','deletePengalaman');
 });
 
 Route::middleware('auth:sanctum')->group(function () {

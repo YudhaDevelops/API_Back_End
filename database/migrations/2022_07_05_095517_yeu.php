@@ -13,13 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        // Schema::create('users', function (Blueprint $table) {
-        //     $table->id('id');
-        //     $table->string('nama_lengkap', 100);
-        //     $table->string('email', 255);
-        //     $table->string('password', 255);
-        //     $table->integer('role');
-        // });
+        Schema::create('users', function (Blueprint $table) {
+            $table->id('id');
+            $table->string('nama_lengkap', 100);
+            $table->string('email', 255);
+            $table->string('password', 255);
+            $table->integer('role');
+            $table->timestamps();
+        });
+
+        Schema::create('session_user', function (Blueprint $table) {
+            $table->id('id');
+            $table->string('sesi');
+            $table->timestamps();
+        });
 
         Schema::create('verifikasi', function (Blueprint $table) {
             $table->unsignedBigInteger('id_admin');
@@ -35,7 +42,7 @@ return new class extends Migration
         Schema::create('provinsi', function (Blueprint $table) {
             $table->char('id',2);
             $table->string('nama',255);
-            $table->timestamps();
+
             $table->primary('id');
         });
 
@@ -43,7 +50,7 @@ return new class extends Migration
             $table->char('id',4);
             $table->char('id_provinsi',2);
             $table->string('nama',255);
-            $table->timestamps();
+
             $table->primary('id');
             $table->foreign('id_provinsi')->references('id')->on('provinsi');
         });
@@ -52,7 +59,7 @@ return new class extends Migration
             $table->char('id',7);
             $table->char('id_kabupaten',4);
             $table->string('nama',255);
-            $table->timestamps();
+
             $table->primary('id');
             $table->foreign('id_kabupaten')->references('id')->on('kabupaten');
         });
@@ -61,21 +68,31 @@ return new class extends Migration
             $table->char('id',10);
             $table->char('id_kecamatan',7);
             $table->string('nama',255);
-            $table->timestamps();
+
             $table->primary('id');
             $table->foreign('id_kecamatan')->references('id')->on('kecamatan');
+        });
+
+        Schema::create('alamat', function (Blueprint $table) {
+            $table->id();
+            $table->text('detail_alamat');
+            $table->char('id_kelurahan', 10);
+            $table->char('kode_pos', 5);
+            $table->timestamps();
+            $table->foreign('id_kelurahan') -> references('id') -> on('kelurahan');
         });
 
         Schema::create('data_diri', function (Blueprint $table) {
             // $table->id();
             $table->unsignedBigInteger('id_user');
             $table->enum('jenis_kelamin',['Laki-laki', 'Perempuan']);
+            $table->string('tempat_lahir',50);
             $table->date('tanggal_lahir');
             $table->string('no_telepon',20);
-            $table->char('alamat_ktp', 10);
-            $table->string('kode_pos_ktp', 5);
-            $table->char('alamat_domisili', 10);
-            $table->string('kode_pos_domisili', 5);
+            $table->text('alamat_ktp');
+            $table->unsignedBigInteger('id_alamat_ktp');
+            $table->text('alamat_domisili');
+            $table->unsignedBigInteger('id_alamat_domisili');
             $table->enum('gol_darah',['A', 'B', 'AB', 'O']);
             $table->text('kondisi_disabilitas');
             $table->string('penyakit',255);
@@ -84,12 +101,12 @@ return new class extends Migration
             $table->boolean('bpjs_kesehatan');
             $table->boolean('bpjs_ketenagakerjaan');
             $table->string('instansi', 255);
-            $table->string('file_pelatihan', 255);
+            // $table->string('file_pelatihan', 255);
             $table->boolean('ready')->default('0');
             $table->timestamps();
             $table->foreign('id_user') -> references('id') -> on('users');
-            $table->foreign('alamat_ktp') -> references('id') -> on('kelurahan');
-            $table->foreign('alamat_domisili') -> references('id') -> on('kelurahan');
+            $table->foreign('id_alamat_ktp') -> references('id') -> on('alamat');
+            $table->foreign('id_alamat_domisili') -> references('id') -> on('alamat');
 
             $table->primary('id_user');
         });
@@ -106,11 +123,11 @@ return new class extends Migration
             $table->timestamps();
             $table->foreign('id_relawan')->references('id')->on('users');
             $table->foreign('id_keahlian')->references('id_keahlian')->on('keahlian');
-            
+            $table->primary(['id_relawan', 'id_keahlian']);
         });
 
         Schema::create('pengalaman', function (Blueprint $table) {
-            $table->id('id_pengalaman');
+            $table->id();
             $table->string('nama_instansi',50);
             $table->string('durasi_waktu',20);
             $table->timestamps();
@@ -121,14 +138,18 @@ return new class extends Migration
             $table->unsignedBigInteger('id_pengalaman');
             $table->timestamps();
             $table->foreign('id_relawan')->references('id')->on('users');
-            $table->foreign('id_pengalaman')->references('id_pengalaman')->on('pengalaman');
+            $table->foreign('id_pengalaman')->references('id')->on('pengalaman');
+
+            $table->primary(['id_relawan', 'id_pengalaman']);
         });
 
         Schema::create('project', function (Blueprint $table) {
             $table->id('id_project');
-            $table->string('nama_project',50);
-            $table->string('foto',255);
-            $table->timestamps();
+            $table->string('judul',255);
+            $table->text('deskripsi');
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_selesai');
+            $table->text('lokasi');
         });
 
         Schema::create('relawan_project', function (Blueprint $table) {
@@ -137,6 +158,8 @@ return new class extends Migration
             $table->timestamps();
             $table->foreign('id_relawan')->references('id')->on('users');
             $table->foreign('id_project')->references('id_project')->on('project');
+
+            $table->primary(['id_relawan', 'id_project']);
         });
 
         
@@ -151,6 +174,9 @@ return new class extends Migration
      */
     public function down()
     {
+        if (Schema::hasTable('session_user')) {
+            Schema::drop('session_user');
+        }
         if (Schema::hasTable('verifikasi')) {
             Schema::drop('verifikasi');
         }
@@ -177,6 +203,9 @@ return new class extends Migration
         }
         if (Schema::hasTable('users')) {
             Schema::drop('users');
+        }
+        if (Schema::hasTable('alamat')) {
+            Schema::drop('alamat');
         }
         if (Schema::hasTable('kelurahan')) {
             Schema::drop('kelurahan');
