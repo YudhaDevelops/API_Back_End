@@ -394,15 +394,27 @@ class DataDiriController extends Controller
         }
     }
 
-    public static function deletePengalaman($idUser){
-        $relawanPengalaman = Relawan_Pengalaman::where('id_relawan',$idUser)->get();
-        if(!empty($relawanPengalaman)){
-            // dd($relawanPengalaman);
-            $pengalaman = Pengalaman::where('id_pengalaman',$relawanPengalaman->id_pengalaman)->get();
-            dd($pengalaman);
-        }
-        return ApiFormat::responseError(404,'Tidak ada data');
+    public function deletePengalaman(){
         if(Auth::check() == true && auth()->user()->role == 0){
+            
+            $relawan_pengalaman = User::join('relawan_pengalaman', 'relawan_pengalaman.id_relawan', '=', 'users.id')
+                        ->join('pengalaman','pengalaman.id','=','relawan_pengalaman.id_pengalaman')
+                        ->where('id_relawan', auth()->user()->id)
+                        ->first();
+        
+            if(!empty($relawan_pengalaman)){
+                $relasiPengalaman = Relawan_Pengalaman::where('id_relawan',$relawan_pengalaman->id_relawan)
+                                    ->where('id_pengalaman',$relawan_pengalaman->id_pengalaman)->delete();
+                if($relasiPengalaman != 1){
+                    return ApiFormat::responseError(500,'Data relasi relawan & pengalaman gagal dihapus');
+                }
+                $pengalaman = Pengalaman::where('id',$relawan_pengalaman->id_pengalaman)->delete();
+                if($pengalaman != 1){
+                    return ApiFormat::responseError(500,'Data pengalaman gagal dihapus');
+                }
+                return $this->sendResponse('Data Berhasil Dihapus');
+            }
+        return ApiFormat::responseError(404,'Tidak ada data');
 
         }
     }

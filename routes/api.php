@@ -96,7 +96,7 @@ Route::controller(DataDiriController::class)->group(function(){
 
     // soal data Pengalaman
     Route::post('/tambahPengalaman','tambahPengalaman');
-    Route::get('/deletePengalaman/{idUser}','deletePengalaman');
+    Route::get('/deletePengalaman','deletePengalaman');
 });
 
 Route::middleware('auth:sanctum')->group(function () {
